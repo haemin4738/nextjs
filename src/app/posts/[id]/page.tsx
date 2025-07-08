@@ -1,4 +1,11 @@
+"use client";
+
+import { useState } from "react";
+
 function PostDetail() {
-  return <>게시글상세</>;
+  useState();
+
+  return <>게시글 상세</>;
 }
+
 export default PostDetail;
