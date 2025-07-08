@@ -1,11 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 function PostDetail() {
-  useState();
+  const params = useParams();
+  const [post, setPost] = useState();
 
-  return <>게시글 상세</>;
+  useEffect(() => {
+    fetch(`https://dummyjson.com/posts/${params.id}`)
+      .then((res) => res.json())
+      .then((res) => setPost(res));
+  }, []);
+  return (
+    <>
+      <div>번호 : {post.id}</div>
+      <h1>{post.title}</h1>
+      <p>{post.body}</p>
+    </>
+  );
 }
 
 export default PostDetail;
