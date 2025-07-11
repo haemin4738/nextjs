@@ -6,30 +6,31 @@ import { useEffect, useState } from "react";
 
 function PostDetail() {
   const [post, setPost] = useState({});
-  const [comment, setComment] = useState({});
+  const [comments, setComments] = useState([]);
   const params = useParams();
   const { id } = params;
 
-  const fetchPost = async () => {
+  const fetchData = async () => {
     const { data, error } = await supabase
       .from("posts")
       .select("*")
       .eq("id", id)
       .single();
+
     setPost(data);
   };
-  const fetchComment = async () => {
+
+  const fetchComments = async () => {
     const { data, error } = await supabase
       .from("comments")
       .select("*")
-      .eq("id", id)
-      .single();
-    setComment(data);
+      .eq("post_id", id);
+    setComments(data);
   };
 
   useEffect(() => {
-    fetchPost();
-    fetchComment();
+    fetchData();
+    fetchComments();
   }, []);
 
   return (
@@ -37,8 +38,13 @@ function PostDetail() {
       <h1>{id}번</h1>
       <div className="text-2xl">{post.title}</div>
       <p>{post.contents}</p>
-      <div className="text-2xl">{comment.id}</div>
-      <p className="text-xs">{comment.contents}</p>
+      <ul>
+        {comments.map((comment) => (
+          <li key={comment.id} className="text-xs underline">
+            댓글 번호 : {comment.id} / 내용 : {comment.contents}
+          </li>
+        ))}
+      </ul>
     </>
   );
 }
