@@ -1,21 +1,13 @@
 "use client";
 
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
+import Link from "next/link";
 
 function Nav() {
-  const auth = useAuth();
-  const router = useRouter();
-
-  if (!auth) {
-    return <div>Loading...</div>;
-  }
-
-  const { isLoading, user, signout } = auth;
+  const { isLoading, user, signOut } = useAuth();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <>로딩중...</>;
   }
 
   return (
@@ -29,7 +21,7 @@ function Nav() {
       {user ? (
         <>
           <span>{user.email} 님</span>
-          <button onClick={signout}>로그아웃</button>
+          <button onClick={signOut}>로그아웃</button>
         </>
       ) : (
         <>
