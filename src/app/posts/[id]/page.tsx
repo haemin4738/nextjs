@@ -1,6 +1,6 @@
 "use client";
 
-import { supabase } from "@/app/lib/supabase";
+import { supabase } from "@/lib/supabase";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -9,6 +9,8 @@ function PostDetail() {
   const [comments, setComments] = useState([]);
   const params = useParams();
   const { id } = params;
+
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchData = async () => {
     const { data, error } = await supabase
@@ -31,7 +33,12 @@ function PostDetail() {
   useEffect(() => {
     fetchData();
     fetchComments();
+    setIsLoading(false);
   }, []);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
