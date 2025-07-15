@@ -3,10 +3,10 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: true, // vercel 배포 오류 제거
   },
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: true, // vercel 배포 오류 제거
   },
 };
 
