@@ -5,8 +5,8 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 function PostDetail() {
-  const [post, setPost] = useState({});
-  const [comments, setComments] = useState([]);
+  const [post, setPost] = useState<any>({});
+  const [comments, setComments] = useState<any[]>([]);
   const params = useParams();
   const { id } = params;
 
@@ -27,7 +27,7 @@ function PostDetail() {
       .from("comments")
       .select("*")
       .eq("post_id", id);
-    setComments(data);
+    setComments(data ?? []);
   };
 
   useEffect(() => {

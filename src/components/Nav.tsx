@@ -5,8 +5,14 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 
 function Nav() {
-  const { isLoading, user, signout } = useAuth();
+  const auth = useAuth();
   const router = useRouter();
+
+  if (!auth) {
+    return <div>Loading...</div>;
+  }
+
+  const { isLoading, user, signout } = auth;
 
   if (isLoading) {
     return <div>Loading...</div>;

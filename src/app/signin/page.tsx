@@ -1,17 +1,17 @@
 "use client";
 
-import { supabase } from "@/lib/supabase";
+import { useAuth } from "@/context/AuthContext";
+
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useAuth } from "@/context/AuthContext";
 
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { signIn } = useAuth();
   const router = useRouter();
+  const { signIn } = useAuth();
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { error } = await signIn(email, password);
 
@@ -27,20 +27,18 @@ function SignIn() {
   return (
     <>
       <h1>로그인</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleOnSubmit}>
         <input
           type="email"
           name="email"
-          value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
+          placeholder="EMAIL"
         />
         <input
           type="password"
           name="password"
-          value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
+          placeholder="PASSWORD"
         />
         <button type="submit">로그인</button>
       </form>
