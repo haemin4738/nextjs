@@ -12,6 +12,9 @@ function Nav() {
       <Link href="/signup" className="p-2 rounded hover:bg-gray-100">
         회원가입
       </Link>
+      <Link href="/signin" className="p-2 rounded hover:bg-gray-100">
+        로그인
+      </Link>
     </nav>
   );
 }
