@@ -41,7 +41,7 @@ function PostDetail() {
       <ul>
         {comments.map((comment) => (
           <li key={comment.id} className="text-xs underline">
-            댓글 번호 : {comment.id} / 내용 : {comment.contents}
+            {comment.contents}
           </li>
         ))}
       </ul>
